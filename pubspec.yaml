@@ -11,12 +11,11 @@ environment:
 
 
 dependencies:
-
-  freezed_annotation:
-
+  freezed_annotation: ^2.4.1
+  http: ^1.2.1
+  provider: ^6.1.1
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
@@ -35,11 +34,6 @@ dev_dependencies:
 
 
 flutter:
-
+  uses-material-design: true
   assets:
     - assets/images/
-
-
-  uses-material-design: true
-
-
