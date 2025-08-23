@@ -35,7 +35,10 @@ dev_dependencies:
 
 
 flutter:
-
+  fonts:
+    - family: AlpenFont
+      fonts:
+        - asset: assets/fonts/AlpenFontFree.otf
   assets:
     - assets/images/
 
