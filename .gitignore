@@ -43,3 +43,23 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# iOS / macOS CocoaPods
+ios/Pods/
+macos/Pods/
+Podfile.lock
+Podfile        # ← 追加（iOS用 Podfile）
+macos/Podfile  # ← 追加（macOS用 Podfile）
+
+# Xcode workspace user data
+ios/Runner.xcworkspace/
+macos/Runner.xcworkspace/
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
+**/contents.xcworkspacedata   # ← 追加（自動生成ワークスペースデータ）
+
+# Xcode generated configs
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
+macos/Flutter/Flutter-Debug.xcconfig
+macos/Flutter/Flutter-Release.xcconfig

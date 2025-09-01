@@ -20,7 +20,7 @@ class AppTheme {
         brightness: Brightness.light,
       ),
       useMaterial3: true,
-      fontFamily: 'NotoSansJP',
+      fontFamily: 'AlpenFont',
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,

@@ -88,7 +88,7 @@ class ProductCard extends StatelessWidget {
   }
 
   Widget _buildProductImage() {
-    final imageWidget = Image.asset(
+    return Image.asset(
       item.imagePath,
       width: AppDimens.cardImageSize,
       height: AppDimens.cardImageSize,
@@ -98,19 +98,9 @@ class ProductCard extends StatelessWidget {
         return Icon(
           Icons.bakery_dining,
           size: AppDimens.iconSizeLarge,
-          color: item.inStock ? AppColors.primary : AppColors.textDisabled,
+          color: AppColors.primary,
         );
       },
     );
-
-    return item.inStock
-        ? imageWidget
-        : ColorFiltered(
-            colorFilter: const ColorFilter.mode(
-              Colors.grey,
-              BlendMode.saturation,
-            ),
-            child: imageWidget,
-          );
   }
 }

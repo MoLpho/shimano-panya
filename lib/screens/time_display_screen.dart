@@ -91,7 +91,7 @@ class _TimeDisplayScreenState extends State<TimeDisplayScreen> {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/背景画像.png'),
+              image: AssetImage('assets/images/background.png'),
               fit: BoxFit.cover,
             ),
           ),

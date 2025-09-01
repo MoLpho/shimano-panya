@@ -9,15 +9,14 @@ class BreadItem {
     required this.inStock,
     required this.imagePath,
   });
-
   /// デフォルトのパン商品リストを取得
   static List<BreadItem> get defaultBreadItems => [
-        BreadItem(name: 'じゃがバタ', inStock: true, imagePath: 'assets/images/Group 13.png'),
-        BreadItem(name: '明太フランス', inStock: true, imagePath: 'assets/images/Group 17.png'),
-        BreadItem(name: 'チョコクロ', inStock: true, imagePath: 'assets/images/Group 18.png'),
-        BreadItem(name: 'フレンチトースト', inStock: true, imagePath: 'assets/images/Group 34.png'),
-        BreadItem(name: 'ドッグ', inStock: true, imagePath: 'assets/images/Group 39.png'),
-        BreadItem(name: 'デニッシュ', inStock: true, imagePath: 'assets/images/Group 1222.png'),
-        BreadItem(name: 'その他', inStock: true, imagePath: 'assets/images/Group 45.png'),
-      ];
+    BreadItem(name: 'じゃがバタ', inStock: true, imagePath: 'assets/images/jagabata.png'),
+    BreadItem(name: '明太フランス', inStock: true, imagePath: 'assets/images/mentai'),
+    BreadItem(name: 'チョコクロ', inStock: true, imagePath: 'assets/images/choco_croissant'),
+    BreadItem(name: 'フレンチトースト', inStock: true, imagePath: 'assets/images/french.png'),
+    BreadItem(name: 'ドッグ', inStock: true, imagePath: 'assets/images/sausage.png'),
+    BreadItem(name: 'デニッシュ', inStock: true, imagePath: 'assets/images/batadeni.png'),
+    BreadItem(name: 'その他', inStock: true, imagePath: 'assets/images/Group 45.png'),
+  ];
 }

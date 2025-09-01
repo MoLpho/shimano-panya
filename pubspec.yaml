@@ -35,5 +35,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: AlpenFont
+      fonts:
+        - asset: assets/fonts/AlpenFontFree.otf
   assets:
     - assets/images/

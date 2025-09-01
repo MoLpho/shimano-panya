@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constants/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../providers/bread_provider.dart';
 import '../models/bread_inventory.dart';
+import '../widgets/product_card.dart';
+import '../models/bread_item.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({Key? key}) : super(key: key);
@@ -28,45 +31,50 @@ class _InventoryScreenState extends State<InventoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('パン在庫状況'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadInventory,
+      body: Stack(
+        children: [
+          // SafeAreaの外に置く背景画像
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/background.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          // SafeAreaで囲んだコンテンツ
+          SafeArea(
+            child: Consumer<BreadProvider>(
+              builder: (context, provider, _) {
+                if (provider.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (provider.error != null) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('エラーが発生しました'),
+                        Text(provider.error!),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: _loadInventory,
+                          child: const Text('再読み込み'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                final inventory = provider.inventory;
+                if (inventory == null) {
+                  return const Center(child: Text('データがありません'));
+                }
+
+                return _buildInventoryList(inventory);
+              },
+            ),
           ),
         ],
-      ),
-      body: Consumer<BreadProvider>(
-        builder: (context, provider, _) {
-          if (provider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (provider.error != null) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('エラーが発生しました'),
-                  Text(provider.error!), // エラーメッセージを表示
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: _loadInventory,
-                    child: const Text('再読み込み'),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          final inventory = provider.inventory;
-          if (inventory == null) {
-            return const Center(child: Text('データがありません'));
-          }
-
-          return _buildInventoryList(inventory);
-        },
       ),
     );
   }
@@ -75,28 +83,45 @@ class _InventoryScreenState extends State<InventoryScreen> {
     final breadLabels = BreadInventory.getBreadLabels();
     final counts = inventory.reliableCounts;
 
-    return ListView.builder(
-      itemCount: breadLabels.length,
-      itemBuilder: (context, index) {
-        final breadId = breadLabels.keys.elementAt(index);
-        final breadName = breadLabels[breadId]!;
-        final count = counts[breadId] ?? 0;
-
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ListTile(
-            title: Text(breadName),
-            trailing: Text(
-              '$count個',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: count > 0 ? Colors.green : Colors.red,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'いまのパン',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
             ),
           ),
-        );
-      },
+        ),
+        Expanded(
+          child: GridView.builder(
+            padding: const EdgeInsets.all(16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+            ),
+            itemCount: breadLabels.length,
+            itemBuilder: (context, index) {
+              final breadId = breadLabels.keys.elementAt(index);
+              final breadName = breadLabels[breadId]!;
+              final count = counts[breadId] ?? 0;
+
+              final item = BreadItem(
+                name: breadName,
+                inStock: count > 0,
+                imagePath: 'assets/images/${breadId}.png',
+              );
+
+              return ProductCard(item: item);
+            },
+          ),
+        ),
+      ],
     );
   }
 }
