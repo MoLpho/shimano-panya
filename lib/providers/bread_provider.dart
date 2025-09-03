@@ -9,8 +9,6 @@ class BreadProvider with ChangeNotifier {
       final newInventory = await _breadService.fetchBreadInventory();
       if (_inventory != null) {
         _inventory = BreadInventory(
-          realtimeCounts: _inventory!.realtimeCounts,
-          realtimeTotal: _inventory!.realtimeTotal,
           reliableCounts: newInventory.reliableCounts,
           reliableTotal: newInventory.reliableTotal,
           timestamp: newInventory.timestamp,

@@ -72,7 +72,7 @@ class ProductCard extends StatelessWidget {
                 const SizedBox(height: AppDimens.paddingSmall),
                 // 在庫数表示
                 Text(
-                  '残り：${item.inStock ? '3' : '0'}個',
+                  '残り：${item.count}個',
                   style: TextStyle(
                     fontSize: AppDimens.fontSizeSmall,
                     fontWeight: FontWeight.bold,

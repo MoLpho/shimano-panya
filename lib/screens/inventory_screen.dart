@@ -104,8 +104,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
   }
 
   Widget _buildInventoryList(BreadInventory inventory) {
-    final breadLabels = BreadInventory.getBreadLabels();
-    final counts = inventory.reliableCounts;
+  final breadLabels = BreadInventory.getBreadLabels();
+  final counts = inventory.reliableCounts;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -139,6 +139,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 name: breadName,
                 inStock: count > 0,
                 imagePath: 'assets/images/${breadId}.png',
+                count: count,
               );
 
               return ProductCard(item: item);

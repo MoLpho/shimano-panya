@@ -1,13 +1,9 @@
 class BreadInventory {
-  final Map<String, int> realtimeCounts;
-  final int realtimeTotal;
   final Map<String, int> reliableCounts;
   final int reliableTotal;
   final DateTime timestamp;
 
   BreadInventory({
-    required this.realtimeCounts,
-    required this.realtimeTotal,
     required this.reliableCounts,
     required this.reliableTotal,
     required this.timestamp,
@@ -16,10 +12,6 @@ class BreadInventory {
   factory BreadInventory.fromJson(Map<String, dynamic> json) {
     try {
       return BreadInventory(
-        realtimeCounts: Map<String, int>.from(
-          json['realtime']?['counts'] ?? {},
-        ),
-        realtimeTotal: json['realtime']?['total'] ?? 0,
         reliableCounts: Map<String, int>.from(
           json['reliable']?['counts'] ?? {},
         ),
