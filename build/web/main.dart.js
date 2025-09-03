@@ -19359,7 +19359,7 @@ j=i}s.MH(new A.vO(p,B.D1,o,j,h))
 s.Bg()},
 Cl:function Cl(a){this.a=a},
 Ww:function Ww(){},
-alk(a){var s,r,q,p,o,n="reliable",m="timestamp"
+alk(a){var s,r,q,p,o,n="realtime",m="timestamp"
 try{r=a.i(0,n)
 r=r==null?null:J.pW(r,"counts")
 if(r==null){r=t.z

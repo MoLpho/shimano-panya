@@ -105,7 +105,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
   Widget _buildInventoryList(BreadInventory inventory) {
   final breadLabels = BreadInventory.getBreadLabels();
-  final counts = inventory.reliableCounts;
+  final counts = inventory.realtimeCounts;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
