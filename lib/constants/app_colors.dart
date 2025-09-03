@@ -11,7 +11,7 @@ class AppColors {
   static const Color textDisabled = Color(0xFFBCAAA4); // Brown 300
   
   // 背景色
-  static const Color background = Color(0xFFFFFDF9); // オフホワイト
+  static const Color background = Color(0xFFE5F6FF); // 水色
   static const Color surface = Color(0xFFFFFFFF); // 白
   static const Color error = Color(0xFFD32F2F); // Red 700
   

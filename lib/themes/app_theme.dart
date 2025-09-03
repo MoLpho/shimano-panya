@@ -9,7 +9,6 @@ class AppTheme {
         seedColor: AppColors.primary,
         primary: AppColors.primary,
         secondary: AppColors.primary.withOpacity(0.7),
-        background: AppColors.background,
         surface: AppColors.surface,
         error: AppColors.error,
         onPrimary: Colors.white,
@@ -19,6 +18,7 @@ class AppTheme {
         onError: Colors.white,
         brightness: Brightness.light,
       ),
+      scaffoldBackgroundColor: AppColors.background,
       useMaterial3: true,
       fontFamily: 'AlpenFont',
       appBarTheme: const AppBarTheme(

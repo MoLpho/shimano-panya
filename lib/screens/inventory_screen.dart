@@ -30,48 +30,60 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWide = screenWidth > 800; // 800px以上ならPC想定
+
     return Scaffold(
       body: Stack(
         children: [
-          // SafeAreaの外に置く背景画像
+          // 背景
           Positioned.fill(
-            child: Image.asset(
-              'assets/images/background.png',
-              fit: BoxFit.cover,
-            ),
+            child: !isWide
+              ? Image.asset(
+                // スマホ用背景（縦長イラスト）
+                'assets/images/background.png',
+                fit: BoxFit.cover,
+              )
+              : const SizedBox.shrink(), // PC時は何も表示せず Scaffold 背景色が見える
           ),
-          // SafeAreaで囲んだコンテンツ
+
+          // コンテンツ
           SafeArea(
-            child: Consumer<BreadProvider>(
-              builder: (context, provider, _) {
-                if (provider.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1200),
+                child: Consumer<BreadProvider>(
+                  builder: (context, provider, _) {
+                    if (provider.isLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                if (provider.error != null) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('エラーが発生しました'),
-                        Text(provider.error!),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: _loadInventory,
-                          child: const Text('再読み込み'),
+                    if (provider.error != null) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('エラーが発生しました'),
+                            Text(provider.error!),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: _loadInventory,
+                              child: const Text('再読み込み'),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }
+                      );
+                    }
 
-                final inventory = provider.inventory;
-                if (inventory == null) {
-                  return const Center(child: Text('データがありません'));
-                }
+                    final inventory = provider.inventory;
+                    if (inventory == null) {
+                      return const Center(child: Text('データがありません'));
+                    }
 
-                return _buildInventoryList(inventory);
-              },
+                    return _buildInventoryList(inventory);
+                  },
+                ),
+              ),
             ),
           ),
         ],
@@ -100,8 +112,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
         Expanded(
           child: GridView.builder(
             padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200, // 1カードの最大幅
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
             ),
