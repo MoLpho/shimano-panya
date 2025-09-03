@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/app_colors.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 import '../providers/bread_provider.dart';
 import '../models/bread_inventory.dart';
 import '../widgets/product_card.dart';
@@ -14,13 +15,24 @@ class InventoryScreen extends StatefulWidget {
 }
 
 class _InventoryScreenState extends State<InventoryScreen> {
+  Timer? _timer;
   @override
   void initState() {
     super.initState();
     // 画面が初期化された時に在庫情報を取得
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadInventory();
+      // 5秒ごとに在庫情報を更新
+      _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+        final provider = Provider.of<BreadProvider>(context, listen: false);
+        await provider.fetchInventory();
+      });
     });
+  }
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   Future<void> _loadInventory() async {
