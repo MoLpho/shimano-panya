@@ -22,10 +22,10 @@ class _InventoryScreenState extends State<InventoryScreen> {
     // 画面が初期化された時に在庫情報を取得
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadInventory();
-      // 5秒ごとに在庫情報を更新
+      // 5秒ごとに個数だけ静かに更新
       _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
         final provider = Provider.of<BreadProvider>(context, listen: false);
-        await provider.fetchInventory();
+        await provider.refreshCountsOnly();
       });
     });
   }

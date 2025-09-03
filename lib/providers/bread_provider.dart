@@ -3,6 +3,26 @@ import '../models/bread_inventory.dart';
 import '../services/bread_service.dart';
 
 class BreadProvider with ChangeNotifier {
+  // 在庫数だけ静かに更新
+  Future<void> refreshCountsOnly() async {
+    try {
+      final newInventory = await _breadService.fetchBreadInventory();
+      if (_inventory != null) {
+        _inventory = BreadInventory(
+          realtimeCounts: _inventory!.realtimeCounts,
+          realtimeTotal: _inventory!.realtimeTotal,
+          reliableCounts: newInventory.reliableCounts,
+          reliableTotal: newInventory.reliableTotal,
+          timestamp: newInventory.timestamp,
+        );
+      } else {
+        _inventory = newInventory;
+      }
+      notifyListeners();
+    } catch (e) {
+      // エラー無視
+    }
+  }
   final BreadService _breadService = BreadService();
   BreadInventory? _inventory;
   bool _isLoading = false;
