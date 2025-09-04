@@ -46,7 +46,7 @@ class AppDimens {
   static const double cardPadding = 6.0;
   static const double cardBorderRadius = 16.0;
   static const double cardInnerPadding = 6.0;
-  static const double cardImageSize = 70.0;
+  static const double cardImageSize = 80.0;
 
   // アプリバー
   static const double appBarHeight = 100.0;

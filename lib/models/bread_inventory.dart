@@ -34,7 +34,7 @@ class BreadInventory {
       'choco_croissant': 'チョコクロワッサン',
       'batadeni': 'バターデニッシュ',
       'mentai': '明太パン',
-      'jagabata': 'じゃがバタデニッシュ',
+      'jagabata': 'じゃがバタ',
       'sausage': 'ソーセージ',
       'french': 'フレンチトースト',
     };
