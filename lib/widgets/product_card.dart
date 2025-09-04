@@ -62,21 +62,20 @@ class ProductCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: AppDimens.fontSizeMedium,
+                      fontSize: AppDimens.fontSizeXLarge,
                       fontWeight: FontWeight.bold,
-                      color: item.inStock ? AppColors.textPrimary : AppColors.textDisabled,
+                      color: AppColors.textPrimary,
                       height: 1.2,
                     ),
                   ),
                 ),
-                const SizedBox(height: AppDimens.paddingSmall),
                 // 在庫数表示
                 Text(
                   '残り：${item.count}個',
                   style: TextStyle(
-                    fontSize: AppDimens.fontSizeSmall,
+                    fontSize: AppDimens.fontSizeXLarge,
                     fontWeight: FontWeight.bold,
-                    color: item.inStock ? AppColors.textPrimary : AppColors.textDisabled,
+                    color: AppColors.textPrimary
                   ),
                 ),
               ],
@@ -89,9 +88,8 @@ class ProductCard extends StatelessWidget {
 
   Widget _buildProductImage() {
     return Image.asset(
-      item.imagePath,
+      item.inStock? item.imagePath : 'assets/images/sold-out.png',
       width: AppDimens.cardImageSize,
-      height: AppDimens.cardImageSize,
       fit: BoxFit.contain,
       errorBuilder: (context, error, stackTrace) {
         debugPrint('画像の読み込みに失敗しました: ${item.imagePath}');
